@@ -1,0 +1,549 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cs_arenas {
+  csID         Int @id @default(autoincrement())
+  csMap        Int
+  csMinPlayers Int
+  csMaxPlayers Int
+}
+
+model player_accs {
+  aID      Int   @id @default(autoincrement())
+  aModel   Int
+  aOwnedBy Int
+  aBone    Int
+  aDeleted Int
+  aX       Float @db.Float
+  aY       Float @db.Float
+  aZ       Float @db.Float
+  aRX      Float @db.Float
+  aRY      Float @db.Float
+  aRZ      Float @db.Float
+  aSX      Float @db.Float
+  aSY      Float @db.Float
+  aSZ      Float @db.Float
+}
+
+model player_emails {
+  emailID   Int      @id @default(autoincrement())
+  emailTo   String   @db.VarChar(32)
+  emailBy   String   @db.VarChar(32)
+  emailDate DateTime @default(now()) @db.Timestamp(0)
+  emailRead Int
+  emailText String   @db.VarChar(200)
+}
+
+model player_glasses {
+  gID      Int   @id @default(autoincrement())
+  gModel   Int
+  gOwnedBy Int
+  gDeleted Int
+  gX       Float @db.Float
+  gY       Float @db.Float
+  gZ       Float @db.Float
+  gRX      Float @db.Float
+  gRY      Float @db.Float
+  gRZ      Float @db.Float
+  gSX      Float @db.Float
+  gSY      Float @db.Float
+  gSZ      Float @db.Float
+}
+
+model player_hats {
+  hID      Int   @id @default(autoincrement())
+  hModel   Int
+  hOwnedBy Int
+  hDeleted Int
+  hX       Float @db.Float
+  hY       Float @db.Float
+  hZ       Float @db.Float
+  hRX      Float @db.Float
+  hRY      Float @db.Float
+  hRZ      Float @db.Float
+  hSX      Float @db.Float
+  hSY      Float @db.Float
+  hSZ      Float @db.Float
+}
+
+model player_logs {
+  playerLogID   Int      @id @default(autoincrement())
+  playerLogText String   @db.VarChar(250)
+  playerLogDate DateTime @default(now()) @db.Timestamp(0)
+}
+
+model player_nicknames {
+  nickID    Int      @id @default(autoincrement())
+  nickOLD   String   @db.VarChar(32)
+  nickNEW   String   @db.VarChar(32)
+  nickSQLID Int
+  nickAdmin String   @db.VarChar(32)
+  nickDate  DateTime @default(now()) @db.Timestamp(0)
+}
+
+model player_skins {
+  sID      Int @id @default(autoincrement())
+  sModel   Int
+  sOwnedBy Int
+  sDeleted Int
+}
+
+model server_accounts {
+  playerID                                                             Int                   @id @default(autoincrement())
+  playerGameID                                                         Int                   @default(-1)
+  playerName                                                           String                @db.VarChar(32)
+  playerPassword                                                       String                @db.VarChar(150)
+  playerIP                                                             String                @default("not found") @db.VarChar(100)
+  playerLastIP                                                         String                @default("not found") @db.VarChar(100)
+  playerAdmin                                                          Int
+  playerHelper                                                         Int
+  playerLevel                                                          Int                   @default(1)
+  playerRespect                                                        Int
+  playerCash                                                           Int
+  playerBank                                                           Int
+  playerBank2                                                          Int
+  playerSeconds                                                        Float                 @default(0) @db.Float
+  playerHours                                                          Float                 @db.Float
+  playerPayDay                                                         Int                   @default(3600)
+  playerGender                                                         Int
+  playerAge                                                            Int
+  playerSkin                                                           Int
+  playerEmail                                                          String                @db.VarChar(32)
+  playerLanguage                                                       Int                   @default(1)
+  playerReferral                                                       Int
+  playerWarns                                                          Int
+  playerStaffPoints                                                    Int
+  playerRegistrationCompleted                                          Int
+  playerFullAccess                                                     Int
+  playerLastLogin                                                      String                @default("no-one") @db.VarChar(80)
+  playerRegisterDate                                                   DateTime              @default(now()) @db.Timestamp(0)
+  playerPremium                                                        Int
+  playerVip                                                            Int
+  playerCheatsWarnings                                                 Int
+  playerMute                                                           Int
+  playerDrive                                                          Int
+  playerGun                                                            Int
+  playerFly                                                            Int
+  playerBoat                                                           Int
+  playerNewbieMute                                                     Int
+  playerPhone                                                          Int
+  playerCredit                                                         Int
+  playerPhonebook                                                      Int
+  playerGasCan                                                         Int
+  playerWalkie                                                         Int
+  playerKit                                                            Int
+  playerFrequency                                                      Int
+  playerWalkieON                                                       Int
+  playerBusiness                                                       Int                   @default(-1)
+  playerHouse                                                          Int                   @default(-1)
+  playerTogPhone                                                       Int
+  playerPremiumPoints                                                  Int
+  playerFrequencyRank                                                  Int
+  playerFPSShow                                                        Int                   @default(1)
+  playerFaction                                                        Int
+  playerFactionRank                                                    Int
+  playerFactionWarns                                                   Int
+  playerFactionDays                                                    Int
+  playerFactionPunish                                                  Int
+  playerClan                                                           Int
+  playerClanRank                                                       Int
+  playerStatus                                                         Int
+  playerJob                                                            Int
+  playerClanDays                                                       Int
+  playerHat                                                            Int
+  playerLeader                                                         Int
+  playerGlasses                                                        Int
+  playerAccessory                                                      Int
+  playerTutorial                                                       Int
+  playerGiveCash                                                       Int
+  playerSpawn                                                          Int
+  playerHWID                                                           String                @default("0") @db.VarChar(129)
+  playerPizzaSkill                                                     Int                   @default(1)
+  playerFarmSkill                                                      Int                   @default(1)
+  playerTruckerSkill                                                   Int                   @default(1)
+  playerCars                                                           String                @default("0|0|0|0|0|0|0|0|0|0|") @db.VarChar(200)
+  playerCarSlots                                                       Int                   @default(0)
+  playerAchievements                                                   String                @default("0|0|0|0|0|0|0|0|0|0|0|0") @db.VarChar(100)
+  playerPaintRank                                                      Int
+  playerRankupKills                                                    Int
+  playerPaintBallKills                                                 Int
+  playerRent                                                           Int                   @default(-1)
+  playerRFvr                                                           Int
+  playerRTickets                                                       Int
+  playerTester                                                         Int
+  playerWanted                                                         Int                   @default(0)
+  playerWantedReporter                                                 String                @default("no-one") @db.VarChar(32)
+  playerWantedReason                                                   String                @default("without crime") @db.VarChar(100)
+  playerJailed                                                         Int
+  playerJailTime                                                       Int
+  playerDriveS                                                         Int
+  playerGunS                                                           Int
+  playerBoatS                                                          Int
+  playerFlyS                                                           Int
+  playerRaport                                                         String                @default("0|0|0|0|0") @db.VarChar(120)
+  playerRaportDays                                                     Int                   @default(7)
+  playerRaportWarn                                                     Int
+  playerFactionPayDay                                                  Int
+  playerFactionSalary                                                  Int
+  playerReportMute                                                     Int
+  playerRob                                                            Int                   @default(0)
+  playerDailyQuests                                                    String                @default("-1|-1|-1") @db.VarChar(120)
+  playerDailyQuestsProgress                                            String                @default("0|0|0") @db.VarChar(120)
+  playerDailyQuestsProgressNeeded                                      String                @default("0|0|0") @db.VarChar(120)
+  playerColor                                                          Int                   @default(-1)
+  playerColorCategory                                                  Int
+  playerArrests                                                        Int
+  playerCrimes                                                         Int
+  playerHiddens                                                        Int
+  playerPayDayShow                                                     Int                   @default(1)
+  playerShowHealth                                                     Int                   @default(0)
+  playerShowArmour                                                     Int                   @default(0)
+  playerJobSkills                                                      String                @default("1|1|1|1|1|1|1") @db.VarChar(120)
+  playerSkillsStyle                                                    Int
+  playerJobsXP                                                         String                @default("0|0|0|0|0|0|0") @db.VarChar(120)
+  playerMarriedWith                                                    Int
+  playerMarriedName                                                    String                @default("None") @db.VarChar(32)
+  playerHairs                                                          Int                   @default(0)
+  playerHairsPos                                                       String                @default("0|0|0|0|0|0|0|0|0") @db.VarChar(250)
+  playerGift                                                           Int
+  server_faction_logs_server_accountsToserver_faction_logs_f_logByID   server_faction_logs[] @relation("server_accountsToserver_faction_logs_f_logByID")
+  server_faction_logs_server_accountsToserver_faction_logs_f_logPlayer server_faction_logs[] @relation("server_accountsToserver_faction_logs_f_logPlayer")
+}
+
+model server_adminlogs {
+  logID   Int      @id @default(autoincrement())
+  logBy   String   @db.VarChar(32)
+  logText String   @db.VarChar(200)
+  logDate DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_banlogs {
+  banID     Int      @id @default(autoincrement())
+  banIP     String   @db.Text
+  banPlayer String   @db.VarChar(32)
+  banBy     String   @db.VarChar(32)
+  banReason String   @db.VarChar(100)
+  banDate   DateTime @default(now()) @db.Timestamp(0)
+  banDays   Int
+  banType   Int
+  banOnIP   Int
+  banActive Int
+}
+
+model server_blacklist {
+  bID          Int    @id @default(autoincrement())
+  bPlayerSQLID Int
+  bPlayerName  String @db.VarChar(32)
+  bFactionID   Int
+}
+
+model server_businesses {
+  bizID       Int    @id @default(autoincrement())
+  bizName     String @db.VarChar(32)
+  bizMessage  String @db.VarChar(32)
+  bizOwner    String @db.VarChar(32)
+  bizValue    Int
+  bizOwnedBy  Int
+  bizEntrance Int
+  bizSafe     Int
+  bizSafe2    Int
+  bizStatus   Int
+  bizPosX     Float  @db.Float
+  bizPosY     Float  @db.Float
+  bizPosZ     Float  @db.Float
+  bizIntPosX  Float  @db.Float
+  bizIntPosY  Float  @db.Float
+  bizIntPosZ  Float  @db.Float
+  bizVirtual  Int
+  bizInterior Int    @default(0)
+  bizType     Int
+  bizCanEnter Int
+}
+
+model server_chatlogs {
+  chatID          Int      @id @default(autoincrement())
+  chatLog         String   @db.VarChar(300)
+  chatPlayer      String   @db.VarChar(32)
+  chatPlayerSQLID Int
+  chatType        Int
+  chatDate        DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_collisions {
+  colID    Int    @id @default(autoincrement())
+  colName  String @db.VarChar(64)
+  colPosX  Float  @db.Float
+  colPosY  Float  @db.Float
+  colPosZ  Float  @db.Float
+  colRange Int
+}
+
+model server_dealership {
+  dsID    Int @id @default(autoincrement())
+  dsModel Int
+  dsPrice Int
+  dsStock Int
+  dsType  Int
+}
+
+model server_faction_logs {
+  f_logID                                                          Int             @id @default(autoincrement())
+  f_logFactionID                                                   Int             @db.UnsignedInt
+  f_logText                                                        String          @db.VarChar(250)
+  f_logPlayer                                                      Int
+  f_logByID                                                        Int
+  f_logStatus                                                      Int             @default(0) @db.TinyInt
+  server_accounts_server_accountsToserver_faction_logs_f_logByID   server_accounts @relation("server_accountsToserver_faction_logs_f_logByID", fields: [f_logByID], references: [playerID])
+  server_accounts_server_accountsToserver_faction_logs_f_logPlayer server_accounts @relation("server_accountsToserver_faction_logs_f_logPlayer", fields: [f_logPlayer], references: [playerID])
+
+  @@index([f_logPlayer], name: "FK_server_faction_logs_server_accounts")
+  @@index([f_logByID], name: "FK_server_faction_logs_server_accounts_2")
+}
+
+model server_factions {
+  faction_id          Int    @id @default(autoincrement())
+  faction_name        String @db.VarChar(100)
+  faction_leader      Int
+  faction_ranks       String @db.VarChar(250)
+  faction_motd        String @default("faction motd not set!") @db.VarChar(180)
+  faction_x           Float  @db.Float
+  faction_y           Float  @db.Float
+  faction_z           Float  @db.Float
+  faction_spawn_x     Float  @db.Float
+  faction_spawn_y     Float  @db.Float
+  faction_spawn_z     Float  @db.Float
+  faction_max_members Int
+  faction_interior    Int
+  faction_virtual     Int
+  faction_status      Int
+  faction_type        Int
+  faction_raport_r1   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r2   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r3   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r4   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r5   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r6   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_raport_r7   String @default("0|0|0|0|0") @db.VarChar(100)
+  faction_money       Int
+  faction_money1      Int
+  faction_drugs       Int
+  faction_materials   Int
+}
+
+model server_frequencies {
+  freqID       Int    @id @default(autoincrement())
+  freqOwner    String @db.VarChar(32)
+  freqOwnerSQL Int
+  freqNumber   Int
+  freqPassword String @default("no-one") @db.VarChar(32)
+  freqColor    String @default("C8E0DF") @db.VarChar(32)
+  freqJoinMode Int    @default(0)
+}
+
+model server_houses {
+  houseID       Int    @id @default(autoincrement())
+  houseName     String @db.VarChar(32)
+  houseMessage  String @db.VarChar(32)
+  houseOwner    String @db.VarChar(32)
+  houseValue    Int
+  houseOwnedBy  Int
+  houseRent     Int
+  houseLevel    Int
+  houseSafe     Int
+  houseSafe2    Int
+  houseStatus   Int
+  housePosX     Float  @db.Float
+  housePosY     Float  @db.Float
+  housePosZ     Float  @db.Float
+  houseIntPosX  Float  @db.Float
+  houseIntPosY  Float  @db.Float
+  houseIntPosZ  Float  @db.Float
+  houseVirtual  Int
+  houseInterior Int    @default(0)
+  houseType     Int
+}
+
+model server_jail_logs {
+  jailID       Int      @id @default(autoincrement())
+  jailedBy     String   @db.VarChar(32)
+  jailedPlayer String   @db.VarChar(32)
+  JailedTime   Int
+  JailedReason String   @db.VarChar(180)
+  JailDate     DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_jobs {
+  jobID          Int    @id @default(autoincrement())
+  jobName        String @db.VarChar(32)
+  jobLevel       Int
+  jobPosX        Float  @db.Float
+  jobPosY        Float  @db.Float
+  jobPosZ        Float  @db.Float
+  jobWorkPosX    Float  @db.Float
+  jobWorkPosY    Float  @db.Float
+  jobWorkPosZ    Float  @db.Float
+  jobWorkPlace   Int
+  jobWorkVirtual Int
+}
+
+model server_kicklogs {
+  kickedID     Int      @id @default(autoincrement())
+  kickedPlayer String   @db.VarChar(32)
+  kickedBy     String   @db.VarChar(32)
+  kickedReason String   @db.VarChar(200)
+  kickedDate   DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_locations {
+  locationID   Int    @id @default(autoincrement())
+  locationName String @db.VarChar(64)
+  locationType Int
+  locationX    Float  @db.Float
+  locationY    Float  @db.Float
+  locationZ    Float  @db.Float
+}
+
+model server_mutelogs {
+  muteID               Int      @id @default(autoincrement())
+  mutePlayer           String   @db.VarChar(32)
+  muteBy               String   @db.VarChar(32)
+  muteMinutesInSeconds Int
+  muteReason           String   @db.VarChar(250)
+  muteDate             DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_pcars {
+  carID              Int    @id @default(autoincrement())
+  carOwner           String @db.VarChar(32)
+  carOwnedBy         Int
+  carDays            Int
+  carInsurance       Int    @default(2000)
+  carInsurancePoints Int    @default(10)
+  carModel           Int
+  carVIP             Int
+  carVIPText         String @db.VarChar(64)
+  carStatus          Int
+  carGas             Int    @default(100)
+  carKM              Float  @db.Float
+  carPosX            Float  @db.Float
+  carPosY            Float  @db.Float
+  carPosZ            Float  @db.Float
+  carPosAngle        Float  @db.Float
+  carColor1          Int    @default(1)
+  carColor2          Int    @default(1)
+  carPremium         Int
+  carLastPosX        Float  @db.Float
+  carLastPosY        Float  @db.Float
+  carLastPosZ        Float  @db.Float
+  carLastPosAngle    Float  @db.Float
+  carPlate           String @default("No-one") @db.VarChar(32)
+  carVIPColor        Int
+  carVIPWheels       Int
+  carNeon            Int
+  carNeonType        Int
+  carMods            String @default("0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0") @db.VarChar(250)
+  carHealth          Float  @default(1000) @db.Float
+  carDamageStatus    String @default("0|0|0|0") @db.VarChar(250)
+}
+
+model server_rentvehicles {
+  rentID    Int @id @default(autoincrement())
+  rentModel Int
+}
+
+model server_safezones {
+  safeID      Int    @id @default(autoincrement())
+  safeRange   Int
+  safeName    String @db.VarChar(60)
+  safeAddedBy String @db.VarChar(32)
+  safeX       Float  @db.Float
+  safeY       Float  @db.Float
+  safeZ       Float  @db.Float
+  safeEnabled Int
+  safeDeleted Int
+}
+
+model server_shoplogs {
+  shopLogID  Int      @id @default(autoincrement())
+  shopLog    String   @db.VarChar(250)
+  shopPlayer String   @db.VarChar(32)
+  shopDate   DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_stafflogs {
+  logID   Int    @id @default(autoincrement())
+  logBy   String @db.VarChar(32)
+  logText String @db.VarChar(300)
+  logDate String @db.VarChar(80)
+}
+
+model server_stuff {
+  sID           Int   @id @default(autoincrement())
+  hayKG         Int
+  amus_x        Float @db.Float
+  amus_y        Float @db.Float
+  amus_z        Float @db.Float
+  csPosX        Float @db.Float
+  csPosY        Float @db.Float
+  csPosZ        Float @db.Float
+  dmvPosX       Float @db.Float
+  dmvPosY       Float @db.Float
+  dmvPosZ       Float @db.Float
+  giftStatus    Int
+  giftPosX      Float @db.Float
+  giftPosY      Float @db.Float
+  giftPosZ      Float @db.Float
+  giftRotX      Float @db.Float
+  giftRotY      Float @db.Float
+  giftRotZ      Float @db.Float
+  giftObject    Float @db.Float
+  giftTimes     Int   @default(0)
+  giftFP        Int   @default(0)
+  giftWarns     Int   @default(0)
+  giftPP        Int   @default(0)
+  giftHiddens   Int   @default(0)
+  giftMoney     Int   @default(0)
+  giftMilliards Int   @default(0)
+}
+
+model server_unbanlogs {
+  unbanID     Int      @id @default(autoincrement())
+  unbanText   String   @db.VarChar(200)
+  unbanPlayer String   @db.VarChar(32)
+  unbanBy     String   @db.VarChar(32)
+  unbanDate   DateTime @default(now()) @db.Timestamp(0)
+}
+
+model server_vars {
+  sVarID     Int    @id @default(autoincrement())
+  sVarStatus Int
+  sVarName   String @db.VarChar(64)
+}
+
+model server_vehicles {
+  vehID      Int   @id @default(autoincrement())
+  vehModel   Int
+  vehGameID  Int
+  vehColor1  Int
+  vehColor2  Int
+  vehFaction Int
+  vehRank    Int
+  vehX       Float @db.Float
+  vehY       Float @db.Float
+  vehZ       Float @db.Float
+  vehA       Float @db.Float
+  vehVirtual Int
+}
+
+model server_warnlogs {
+  warnID     Int    @id @default(autoincrement())
+  warnPlayer String @db.VarChar(32)
+  warnBy     String @db.VarChar(32)
+  warnReason String @db.VarChar(200)
+}
