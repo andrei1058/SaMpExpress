@@ -30,4 +30,5 @@ Once you've cloned it create a file called .env and put this key value followed 
 # See the documentation for all the connection string options: https://pris.ly/d/connection-strings
 
 DATABASE_URL="mysql://user:pass@ip:3306/dbName"
+JWT_SECRET="sm3th s3cr3t @22"
 ```

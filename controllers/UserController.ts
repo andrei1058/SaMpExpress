@@ -1,3 +1,5 @@
+import { server_accounts } from ".prisma/client";
+
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -99,4 +101,15 @@ export async function getOnlineLeaders(): Promise<number> {
         }
     });
     return amount;
+}
+
+export async function getUser(username: string) {
+    let account: server_accounts = await prisma.server_accounts.findFirst({
+        where: {
+            playerName: {
+                equals: username
+            }
+        }
+    });
+    return account;
 }
